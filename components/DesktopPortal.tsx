@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import GlobalFooter from "@/components/GlobalFooter";
 import {
-  Gem,
   ShieldCheck,
   Building2,
   FileCheck,
@@ -276,31 +277,21 @@ export default function DesktopPortal() {
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08] transition-all">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3.5 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#D4AF37] via-[#B89327] to-[#6E5513] p-0.5 flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_25px_rgba(212,175,55,0.45)] transition-all">
-              <div className="w-full h-full bg-[#0B0C10] rounded-[10px] flex items-center justify-center">
-                <Gem className="w-5 h-5 text-[#D4AF37]" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-wider text-white">
-                  MDA
-                </span>
-                <span className="text-[10px] font-mono uppercase bg-[#14171F] text-[#D4AF37] border border-white/[0.08] px-2 py-0.5 rounded">
-                  MARKETPLACE
-                </span>
-              </div>
-              <p className="text-[10px] text-white/50 tracking-wider">
-                MINERAL DEALERS AFRICA
-              </p>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Mineral Dealers Africa"
+              width={180}
+              height={42}
+              priority
+              className="h-9 w-auto object-contain"
+            />
           </Link>
 
           {/* Navigation Links */}
           <nav className="flex items-center gap-8 text-sm font-medium text-white/70">
             <Link
-              href="#marketplace"
+              href="/marketplace"
               className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
             >
               <span>Marketplace</span>
@@ -319,10 +310,10 @@ export default function DesktopPortal() {
               Due Diligence
             </Link>
             <Link
-              href="#education"
+              href="/contact"
               className="hover:text-[#D4AF37] transition-colors"
             >
-              Education & Compliance
+              Contact
             </Link>
           </nav>
 
@@ -665,35 +656,8 @@ export default function DesktopPortal() {
         </div>
       </section>
 
-      {/* 7. Desktop Footer */}
-      <footer className="px-8 py-12 border-t border-white/[0.08] bg-[#0B0C10] text-xs text-white/50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#14171F] border border-white/[0.08] flex items-center justify-center">
-              <Gem className="w-4 h-4 text-[#D4AF37]" />
-            </div>
-            <div>
-              <span className="font-bold text-white block">
-                MINERAL DEALERS AFRICA (MDA)
-              </span>
-              <span className="text-[10px] text-white/40">
-                Institutional B2B Commodity Portal · Kampala · Lusaka · Accra · Harare
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-8 font-mono text-[11px]">
-            <span className="flex items-center gap-1.5 text-[#10B981]">
-              <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-              MEMD / LBMA COMPLIANT
-            </span>
-            <span className="text-white/40">|</span>
-            <span className="text-[#D4AF37]">OBSIDIAN ZERAKET THEME</span>
-            <span className="text-white/40">|</span>
-            <span>PWA v1.0 ACTIVE</span>
-          </div>
-        </div>
-      </footer>
+      {/* 7. Global Desktop Footer */}
+      <GlobalFooter />
     </div>
   );
 }

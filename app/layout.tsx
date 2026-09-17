@@ -91,10 +91,15 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "MDA",
   },
-  manifest: "/manifest.json",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/icons/icon-192x192.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+    ],
   },
 };
 
@@ -107,7 +112,7 @@ const jsonLdData = {
       "name": "Mineral Dealers Africa",
       "alternateName": "MDA",
       "url": "https://mineraldealersafrica.com",
-      "logo": "https://mineraldealersafrica.com/icons/icon-512x512.png",
+      "logo": "https://mineraldealersafrica.com/logo.png",
       "description":
         "The sovereign B2B mineral marketplace connecting licensed African mining concessionaires with verified international offtake buyers.",
       "address": {
@@ -117,8 +122,10 @@ const jsonLdData = {
         "addressCountry": "UG"
       },
       "sameAs": [
-        "https://twitter.com/MineralAfrica",
-        "https://linkedin.com/company/mineral-dealers-africa"
+        "https://www.instagram.com/mineraldealersafrica?igsh=ZzVla2Q5dG1scTA5&utm_source=qr",
+        "https://www.tiktok.com/@mineraldealersafrica?_r=1&_t=ZS-95jLJKO1BVi",
+        "https://facebook.com/mineraldealersafrica",
+        "https://www.linkedin.com/in/abu-mukasa-174320159?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
       ]
     },
     {

@@ -19,6 +19,9 @@
 
 # production
 /build
+/public/sw*
+/public/workbox*
+/public/swe-worker*
 
 # misc
 .DS_Store

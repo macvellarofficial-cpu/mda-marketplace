@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Gem,
@@ -110,21 +111,16 @@ export default function MobileOnboarding() {
 
       {/* Top Header */}
       <header className="relative z-10 flex items-center justify-between pt-2 pb-4">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] p-0.5 flex items-center justify-center shadow-[0_0_12px_rgba(212,175,55,0.3)]">
-            <div className="w-full h-full bg-[#0B0C10] rounded-[10px] flex items-center justify-center">
-              <Gem className="w-4 h-4 text-[#D4AF37]" />
-            </div>
-          </div>
-          <div>
-            <span className="font-bold text-base tracking-wider text-white">
-              MDA
-            </span>
-            <span className="text-[9px] text-[#D4AF37] block font-mono tracking-widest">
-              MINERAL DEALERS
-            </span>
-          </div>
-        </div>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Mineral Dealers Africa"
+            width={140}
+            height={32}
+            priority
+            className="h-7 w-auto object-contain"
+          />
+        </Link>
 
         <Link
           href="#marketplace"

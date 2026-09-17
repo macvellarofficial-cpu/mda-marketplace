@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import GlobalFooter from "@/components/GlobalFooter";
 import { Gem, Search, PlusCircle, Sparkles } from "lucide-react";
 import MineralShowcaseCard, {
   MineralLotItem,
@@ -200,20 +202,15 @@ export default function MarketplacePage() {
       {/* Sticky Header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] p-0.5 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-              <div className="w-full h-full bg-[#0B0C10] rounded-[10px] flex items-center justify-center">
-                <Gem className="w-5 h-5 text-[#D4AF37]" />
-              </div>
-            </div>
-            <div>
-              <span className="font-bold text-lg tracking-wider text-white">
-                MDA <span className="text-[#D4AF37] text-xs font-mono">MARKETPLACE</span>
-              </span>
-              <p className="text-[10px] text-white/50 tracking-wider">
-                MINERAL DEALERS AFRICA
-              </p>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Mineral Dealers Africa"
+              width={180}
+              height={42}
+              priority
+              className="h-9 w-auto object-contain"
+            />
           </Link>
 
           <div className="flex items-center gap-4">
@@ -328,6 +325,9 @@ export default function MarketplacePage() {
           </div>
         )}
       </main>
+
+      {/* Global Footer */}
+      <GlobalFooter />
     </div>
   );
 }
