@@ -9,6 +9,9 @@ export default function HeroMedia() {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.85; // Subtle cinematic slow motion
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback: muted video will play on user interaction
+      });
     }
   }, []);
 
@@ -21,18 +24,20 @@ export default function HeroMedia() {
         loop
         muted
         playsInline
-        onLoadedData={() => setIsVideoLoaded(true)}
-        poster="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=1920&q=80"
+        preload="auto"
+        onCanPlay={() => setIsVideoLoaded(true)}
+        poster="/hero-mining-poster.jpg"
         className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
-          isVideoLoaded ? "opacity-35 scale-105" : "opacity-25"
+          isVideoLoaded ? "opacity-35 scale-105" : "opacity-30 scale-100"
         }`}
         style={{
           filter: "contrast(1.15) brightness(0.7) saturate(0.9)",
           transform: "scale(1.05)",
         }}
       >
+        <source src="/hero-mining.mp4" type="video/mp4" />
         <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-digging-in-a-quarry-41718-large.mp4"
+          src="https://videos.pexels.com/video-files/5527788/5527788-hd_1280_720_25fps.mp4"
           type="video/mp4"
         />
       </video>
