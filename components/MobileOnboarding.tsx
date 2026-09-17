@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import NavbarLogo from "@/components/NavbarLogo";
 import {
   Gem,
   ShieldCheck,
@@ -112,14 +112,7 @@ export default function MobileOnboarding() {
       {/* Top Header */}
       <header className="relative z-10 flex items-center justify-between pt-2 pb-4">
         <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.png"
-            alt="Mineral Dealers Africa"
-            width={140}
-            height={32}
-            priority
-            className="h-7 w-auto object-contain"
-          />
+          <NavbarLogo className="scale-85 origin-left" />
         </Link>
 
         <Link

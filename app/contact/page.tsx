@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import NavbarLogo from "@/components/NavbarLogo";
 import {
   Mail,
   Globe,
@@ -75,14 +75,7 @@ export default function ContactPage() {
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08] px-6 lg:px-12 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="Mineral Dealers Africa"
-              width={180}
-              height={42}
-              priority
-              className="h-9 w-auto object-contain"
-            />
+            <NavbarLogo />
           </Link>
 
           <div className="flex items-center gap-4">

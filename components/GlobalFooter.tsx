@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import NavbarLogo from "@/components/NavbarLogo";
 import { Mail, Globe, MapPin, ShieldCheck, Lock } from "lucide-react";
 
 export const SOCIAL_LINKS = [
@@ -71,14 +71,7 @@ export default function GlobalFooter() {
           {/* Col 1: Brand & Headquarters */}
           <div className="md:col-span-5 space-y-4">
             <Link href="/" className="inline-block">
-              <Image
-                src="/logo.png"
-                alt="Mineral Dealers Africa"
-                width={180}
-                height={42}
-                priority
-                className="h-9 w-auto object-contain"
-              />
+              <NavbarLogo />
             </Link>
             <p className="text-xs text-white/60 leading-relaxed max-w-sm font-sans">
               The sovereign B2B mineral exchange connecting accredited African mining concessions directly with international offtake buyers under certified assay and bonded escrow governance.

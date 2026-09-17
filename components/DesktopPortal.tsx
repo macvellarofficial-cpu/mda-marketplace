@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
+import NavbarLogo from "@/components/NavbarLogo";
 import {
   ShieldCheck,
   Building2,
@@ -278,14 +278,7 @@ export default function DesktopPortal() {
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="Mineral Dealers Africa"
-              width={180}
-              height={42}
-              priority
-              className="h-9 w-auto object-contain"
-            />
+            <NavbarLogo />
           </Link>
 
           {/* Navigation Links */}

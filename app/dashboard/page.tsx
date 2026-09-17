@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import NavbarLogo from "@/components/NavbarLogo";
 import {
   Gem,
   ShieldCheck,
@@ -608,15 +609,8 @@ export default function DashboardPage() {
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08] px-6 lg:px-12 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Mineral Dealers Africa"
-                width={180}
-                height={42}
-                priority
-                className="h-9 w-auto object-contain"
-              />
+            <Link href="/" className="flex items-center">
+              <NavbarLogo />
             </Link>
 
             {/* Dashboard Sub-navigation Tabs */}

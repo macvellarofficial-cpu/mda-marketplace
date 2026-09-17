@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
+import NavbarLogo from "@/components/NavbarLogo";
 import { Gem, Search, PlusCircle, Sparkles } from "lucide-react";
 import MineralShowcaseCard, {
   MineralLotItem,
@@ -203,14 +203,7 @@ export default function MarketplacePage() {
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="Mineral Dealers Africa"
-              width={180}
-              height={42}
-              priority
-              className="h-9 w-auto object-contain"
-            />
+            <NavbarLogo />
           </Link>
 
           <div className="flex items-center gap-4">
