@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import AppProviders from "@/components/theme/AppProviders";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -147,7 +148,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -155,9 +156,9 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${mono.variable} font-sans bg-[#0B0C10] text-[#F3F4F6] min-h-screen antialiased selection:bg-[#D4AF37] selection:text-black`}
+        className={`${inter.variable} ${mono.variable} font-sans bg-canvas text-[var(--foreground)] min-h-screen antialiased selection:bg-accent selection:text-black`}
       >
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

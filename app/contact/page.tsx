@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import NavbarLogo from "@/components/NavbarLogo";
+import NavbarLanguage from "@/components/NavbarLanguage";
+import AccentPicker from "@/components/theme/AccentPicker";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import {
   Mail,
   Globe,
@@ -70,24 +73,31 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0C10] text-[#F3F4F6] flex flex-col justify-between">
+    <div className="min-h-screen bg-canvas text-[var(--foreground)] flex flex-col justify-between transition-colors">
       {/* Top Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08] px-6 lg:px-12 py-3.5">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-canvas/85 border-b border-theme px-6 lg:px-12 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center">
             <NavbarLogo />
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Zeraket Customization Controls */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/[0.04] dark:bg-white/[0.04] light:bg-slate-100 border border-white/[0.08] dark:border-white/[0.08] light:border-slate-200">
+              <NavbarLanguage />
+              <AccentPicker />
+              <ThemeToggle />
+            </div>
+
             <Link
               href="/marketplace"
-              className="text-xs font-mono text-white/70 hover:text-white transition-colors"
+              className="text-xs font-mono text-white/70 hover:text-white transition-colors hidden sm:inline-block"
             >
               Marketplace
             </Link>
             <Link
               href="/dashboard"
-              className="text-xs font-mono text-white/80 hover:text-white px-3.5 py-2 rounded-xl bg-[#14171F] border border-white/[0.08]"
+              className="text-xs font-mono text-white/80 hover:text-white px-3.5 py-2 rounded-xl bg-surface border border-theme"
             >
               Portal →
             </Link>

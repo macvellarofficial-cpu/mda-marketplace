@@ -4,6 +4,11 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
 import NavbarLogo from "@/components/NavbarLogo";
+import NavbarLanguage from "@/components/NavbarLanguage";
+import AccentPicker from "@/components/theme/AccentPicker";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import HeroMedia from "@/components/HeroMedia";
+import { useLanguage } from "@/components/theme/LanguageContext";
 import {
   ShieldCheck,
   Building2,
@@ -199,6 +204,7 @@ const desktopBatches: MineralLotItem[] = [
 ];
 
 export default function DesktopPortal() {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] =
     useState<MineralCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -272,106 +278,133 @@ export default function DesktopPortal() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0B0C10] text-[#F3F4F6]">
-      {/* 1. Blurred Dark Glass Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08] transition-all">
-        <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+    <div className="min-h-screen bg-canvas text-[var(--foreground)] transition-colors">
+      {/* 1. Blurred Glass Header with Zeraket Controls */}
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-canvas/85 border-b border-theme transition-all">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center flex-shrink-0">
             <NavbarLogo />
           </Link>
 
           {/* Navigation Links */}
-          <nav className="flex items-center gap-8 text-sm font-medium text-white/70">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-white/70 dark:text-white/70 light:text-slate-700">
             <Link
               href="/marketplace"
-              className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
+              className="hover:text-accent transition-colors flex items-center gap-1.5"
             >
-              <span>Marketplace</span>
+              <span>{t("nav.marketplace")}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
             </Link>
             <Link
               href="#services"
-              className="hover:text-[#D4AF37] transition-colors"
+              className="hover:text-accent transition-colors"
             >
-              Services
+              {t("nav.services")}
             </Link>
             <Link
               href="#due-diligence"
-              className="hover:text-[#D4AF37] transition-colors"
+              className="hover:text-accent transition-colors"
             >
-              Due Diligence
+              {t("nav.dueDiligence")}
             </Link>
             <Link
               href="/contact"
-              className="hover:text-[#D4AF37] transition-colors"
+              className="hover:text-accent transition-colors"
             >
-              Contact
+              {t("nav.contact")}
             </Link>
           </nav>
 
-          {/* Action CTAs */}
-          <div className="flex items-center gap-4">
+          {/* Customization Controls & Action CTAs */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Zeraket Customization Controls: Language, Accent, Theme */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/[0.04] dark:bg-white/[0.04] light:bg-slate-100 border border-white/[0.08] dark:border-white/[0.08] light:border-slate-200">
+              <NavbarLanguage />
+              <AccentPicker />
+              <ThemeToggle />
+            </div>
+
             <Link
               href="/login"
-              className="text-xs font-mono text-white/80 hover:text-white px-3 py-2 rounded-lg hover:bg-white/[0.04] transition-colors"
+              className="hidden xl:inline-flex text-xs font-mono text-white/80 hover:text-white px-3 py-2 rounded-lg hover:bg-white/[0.04] transition-colors"
             >
-              Institutional Sign In
+              {t("nav.signIn")}
             </Link>
             <Link
               href="/register"
-              className="px-5 py-2.5 rounded-xl bg-[#D4AF37] hover:bg-[#F59E0B] text-black font-bold text-xs tracking-wide transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_22px_rgba(245,158,11,0.4)] flex items-center gap-1.5 active:scale-95"
+              className="px-4 sm:px-5 py-2.5 rounded-xl bg-accent hover:opacity-90 text-black font-bold text-xs tracking-wide transition-all shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.3)] hover:shadow-[0_0_22px_rgba(var(--color-primary-rgb),0.5)] flex items-center gap-1.5 active:scale-95 flex-shrink-0"
             >
               <Lock className="w-3.5 h-3.5" />
-              <span>Access Portal</span>
+              <span className="hidden sm:inline">{t("nav.accessPortal")}</span>
+              <span className="sm:hidden">Portal</span>
             </Link>
           </div>
         </div>
       </header>
 
-      {/* 2. Hero Section: Dark High-Contrast Banner */}
-      <section className="relative pt-16 pb-12 px-8 overflow-hidden">
-        {/* Glow ambient backgrounds */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[850px] h-[380px] bg-[#D4AF37]/10 blur-[140px] pointer-events-none rounded-full" />
-        <div className="absolute top-48 right-12 w-80 h-80 bg-[#10B981]/5 blur-[120px] pointer-events-none rounded-full" />
+      {/* 2. Hero Section: Cinematic African Mining Video & Dark High-Contrast Banner */}
+      <section className="relative pt-16 pb-14 px-6 lg:px-8 overflow-hidden min-h-[620px] flex items-center">
+        {/* Cinematic African Mining Loop Video Background with Dual Gradient Overlays */}
+        <HeroMedia />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10 w-full">
           <div className="max-w-3xl mb-10">
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#14171F] border border-white/[0.08] text-xs mb-6 shadow-sm">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-surface/85 backdrop-blur-md border border-theme text-xs mb-6 shadow-sm">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
               </span>
-              <span className="text-white/80 font-medium">
-                Sovereign Concession Network
+              <span className="text-white/80 dark:text-white/80 light:text-slate-700 font-medium">
+                {t("hero.badge.network")}
               </span>
-              <span className="text-white/30">|</span>
-              <span className="text-[#D4AF37] font-mono font-semibold">
-                $45M+ Bonded Escrow Reserve
+              <span className="text-white/30 dark:text-white/30 light:text-slate-300">|</span>
+              <span className="text-accent font-mono font-semibold">
+                {t("hero.badge.escrow")}
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
-              Africa&apos;s Most Trusted{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#FFE68C]">
-                Digital Mineral Marketplace
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] text-white dark:text-white light:text-slate-900">
+              {t("hero.title.prefix")}{" "}
+              <span
+                className="text-transparent bg-clip-text bg-gradient-to-r"
+                style={{
+                  backgroundImage: `linear-gradient(to right, var(--color-primary), var(--color-primary-hover), #FDE68A)`,
+                }}
+              >
+                {t("hero.title.highlight")}
               </span>
             </h1>
 
-            <p className="mt-5 text-lg text-white/70 leading-relaxed max-w-2xl">
-              Direct B2B execution between verified African mining concessions and
-              global institutional buyers. Fully backed by independent laboratory
-              assays, multi-signature custody, and statutory export compliance.
+            <p className="mt-5 text-base sm:text-lg text-white/75 dark:text-white/75 light:text-slate-600 leading-relaxed max-w-2xl">
+              {t("hero.subtitle")}
             </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/marketplace"
+                className="px-6 py-3.5 rounded-xl bg-accent text-black font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.35)] hover:opacity-90 active:scale-95 flex items-center gap-2"
+              >
+                <Compass className="w-4 h-4" />
+                <span>{t("hero.cta.source")}</span>
+              </Link>
+              <Link
+                href="/register"
+                className="px-6 py-3.5 rounded-xl bg-white/[0.05] dark:bg-white/[0.05] light:bg-white/80 hover:bg-white/[0.1] border border-white/10 dark:border-white/10 light:border-slate-300 text-white dark:text-white light:text-slate-800 font-semibold text-xs tracking-wider uppercase transition-all flex items-center gap-2 backdrop-blur-sm shadow-sm"
+              >
+                <Building2 className="w-4 h-4 text-accent" />
+                <span>{t("hero.cta.registerConcession")}</span>
+              </Link>
+            </div>
           </div>
 
           {/* 3. Verified Regulatory Trust Ribbon */}
-          <div className="p-4 rounded-2xl bg-[#14171F] border border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.5)] mb-10">
+          <div className="p-4 rounded-2xl bg-surface/90 backdrop-blur-md border border-theme shadow-[0_4px_30px_rgba(0,0,0,0.3)] mb-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-xs font-mono text-white/50">
+              <div className="flex items-center gap-2 text-xs font-mono text-white/50 dark:text-white/50 light:text-slate-500">
                 <ShieldCheck className="w-4 h-4 text-[#10B981]" />
                 <span className="tracking-widest uppercase">
-                  VERIFIED STATUTORY ACCREDITATION:
+                  {t("trust.verified")}:
                 </span>
               </div>
 

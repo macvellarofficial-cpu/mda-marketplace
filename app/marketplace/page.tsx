@@ -4,6 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
 import NavbarLogo from "@/components/NavbarLogo";
+import NavbarLanguage from "@/components/NavbarLanguage";
+import AccentPicker from "@/components/theme/AccentPicker";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import { Gem, Search, PlusCircle, Sparkles } from "lucide-react";
 import MineralShowcaseCard, {
   MineralLotItem,
@@ -198,18 +201,25 @@ export default function MarketplacePage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0B0C10] text-[#F3F4F6]">
+    <div className="min-h-screen bg-canvas text-[var(--foreground)] transition-colors">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-canvas/85 border-b border-theme">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center">
             <NavbarLogo />
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Zeraket Customization Controls */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/[0.04] dark:bg-white/[0.04] light:bg-slate-100 border border-white/[0.08] dark:border-white/[0.08] light:border-slate-200">
+              <NavbarLanguage />
+              <AccentPicker />
+              <ThemeToggle />
+            </div>
+
             <Link
               href="/dashboard/listings/new"
-              className="px-4 py-2 rounded-xl bg-[#D4AF37] hover:bg-[#F59E0B] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(212,175,55,0.25)] flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl bg-accent hover:opacity-90 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(var(--color-primary-rgb),0.3)] flex items-center gap-1.5"
             >
               <PlusCircle className="w-3.5 h-3.5" />
               <span>List Batch</span>
@@ -217,7 +227,7 @@ export default function MarketplacePage() {
 
             <Link
               href="/dashboard"
-              className="text-xs font-mono text-white/70 hover:text-white px-3 py-2 rounded-lg bg-[#14171F] border border-white/[0.08]"
+              className="text-xs font-mono text-white/70 hover:text-white px-3 py-2 rounded-lg bg-surface border border-theme"
             >
               Dashboard →
             </Link>

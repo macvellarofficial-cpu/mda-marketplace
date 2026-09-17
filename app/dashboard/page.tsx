@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import NavbarLogo from "@/components/NavbarLogo";
+import NavbarLanguage from "@/components/NavbarLanguage";
+import AccentPicker from "@/components/theme/AccentPicker";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import {
   Gem,
   ShieldCheck,
@@ -604,9 +607,9 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0C10] text-[#F3F4F6]">
+    <div className="min-h-screen bg-canvas text-[var(--foreground)] transition-colors">
       {/* Top Navbar */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C10]/85 border-b border-white/[0.08] px-6 lg:px-12 py-3.5">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-canvas/85 border-b border-theme px-6 lg:px-12 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center">
@@ -680,6 +683,13 @@ export default function DashboardPage() {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
+            {/* Zeraket Customization Controls */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/[0.04] dark:bg-white/[0.04] light:bg-slate-100 border border-white/[0.08] dark:border-white/[0.08] light:border-slate-200">
+              <NavbarLanguage />
+              <AccentPicker />
+              <ThemeToggle />
+            </div>
+
             {/* Dynamic Role Switcher Pill */}
             <div className="hidden sm:flex items-center bg-[#14171F] p-1 rounded-xl border border-white/[0.08] text-[11px] font-mono">
               <span className="text-white/40 px-2 select-none">ROLE:</span>
