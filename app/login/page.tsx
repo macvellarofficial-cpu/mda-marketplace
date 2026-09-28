@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Gem,
@@ -248,10 +249,16 @@ export default function LoginPage() {
       <main className="max-w-md w-full mx-auto p-6 sm:p-8 rounded-3xl bg-[#14171F] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.8)] relative z-10">
         {/* Brand logo & title */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] p-0.5 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-            <div className="w-full h-full bg-[#0B0C10] rounded-[10px] flex items-center justify-center">
-              <Gem className="w-5 h-5 text-[#D4AF37]" />
-            </div>
+          <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.3)] border border-[#D4AF37]/40 flex-shrink-0">
+            <Image
+              src="/icon.png"
+              alt="MDA Icon"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+              priority
+              unoptimized
+            />
           </div>
           <div>
             <h1 className="text-xl font-bold text-white tracking-tight">

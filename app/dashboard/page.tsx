@@ -31,9 +31,15 @@ import {
   UploadCloud,
   Layers,
   Zap,
+  Phone,
+  Mail,
+  Globe,
+  MapPin,
+  Building2,
 } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import { getMineralFallbackImage } from "@/utils/mineralFallback";
+import { EquipmentItem, DEFAULT_EQUIPMENT_ITEMS } from "@/data/equipmentData";
 
 interface UserProfile {
   fullName: string;
@@ -72,21 +78,6 @@ interface BuyerTender {
   timestamp: string;
 }
 
-// Equipment Catalog Item
-interface EquipmentItem {
-  id: string;
-  name: string;
-  machineType: string;
-  capacity: string;
-  powerRequirement: string;
-  deliveryIncoterms: string;
-  leadTime: string;
-  priceUSD: string;
-  status: "In Stock" | "Made to Order";
-  location: string;
-  specSheetFileName?: string;
-  photoUrl?: string;
-}
 
 // Equipment Inquiry from miner/cooperative
 interface EquipmentInquiry {
@@ -236,73 +227,6 @@ const DEFAULT_SAVED_WATCHLIST = [
   },
 ];
 
-const DEFAULT_EQUIPMENT_ITEMS: EquipmentItem[] = [
-  {
-    id: "EQP-CONE-01",
-    name: "Symons Standard 4 1/4 Ft Secondary Cone Crusher",
-    machineType: "Cone Crusher",
-    capacity: "180 TPH",
-    powerRequirement: "160 kW (3-Phase 380V)",
-    deliveryIncoterms: "FOB Durban Port",
-    leadTime: "Immediate Dispatch",
-    priceUSD: "$210,000",
-    status: "In Stock",
-    location: "Kampala Industrial Depot, Uganda",
-    photoUrl: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "EQP-EXCAV-02",
-    name: "Heavy Mining Hydraulic Excavator (45-Ton Crawler)",
-    machineType: "Excavator",
-    capacity: "320 TPH Bulk Move",
-    powerRequirement: "283 kW Turbo Diesel",
-    deliveryIncoterms: "CIF Mombasa Port",
-    leadTime: "2 Weeks Transit",
-    priceUSD: "$345,000",
-    status: "In Stock",
-    location: "Mombasa Yard, Kenya",
-    photoUrl: "https://images.unsplash.com/photo-1590496793929-36417d3117de?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "EQP-MILL-03",
-    name: "Continuous Discharge Overflow Ball Mill (Ø2.4 x 4.5m)",
-    machineType: "Ball Mill",
-    capacity: "45 TPH Fine Slurry",
-    powerRequirement: "320 kW Wound Motor",
-    deliveryIncoterms: "EXW Ndola Depot",
-    leadTime: "Immediate Dispatch",
-    priceUSD: "$295,000",
-    status: "In Stock",
-    location: "Ndola Heavy Yard, Zambia",
-    photoUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "EQP-GRAV-04",
-    name: "Modular Centrifugal Gold Gravity Separation Plant",
-    machineType: "Gravity Separation Plant",
-    capacity: "60 TPH Raw Ore",
-    powerRequirement: "45 kW Electric Pump",
-    deliveryIncoterms: "FOB Dar es Salaam",
-    leadTime: "Immediate Dispatch",
-    priceUSD: "$165,000",
-    status: "In Stock",
-    location: "Mwanza Logistics Base, Tanzania",
-    photoUrl: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: "EQP-OPTIC-05",
-    name: "Dual-Sensor Optical & X-Ray Gemstone Sorter",
-    machineType: "Optical Gem Sorter",
-    capacity: "15 TPH Diamond & Tanzanite",
-    powerRequirement: "18 kW Pneumatic Air",
-    deliveryIncoterms: "CIF Entebbe Airport",
-    leadTime: "Made to Order (3 wks)",
-    priceUSD: "$480,000",
-    status: "Made to Order",
-    location: "Johannesburg Tech Hub, RSA",
-    photoUrl: "https://images.unsplash.com/photo-1615655406736-b37c4fabf923?auto=format&fit=crop&w=800&q=80",
-  },
-];
 
 const DEFAULT_EQUIPMENT_INQUIRIES: EquipmentInquiry[] = [
   {
@@ -1281,7 +1205,14 @@ export default function DashboardPage() {
 
                         <div className="p-5 space-y-3 text-xs font-mono">
                           <div>
-                            <span className="text-[10px] text-white/40 block">{eqp.id}</span>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[10px] text-white/40 block">{eqp.id}</span>
+                              {eqp.manufacturer && (
+                                <span className="text-[9px] font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-2 py-0.5 rounded border border-[#D4AF37]/30 font-bold">
+                                  {eqp.manufacturer}
+                                </span>
+                              )}
+                            </div>
                             <h3 className="text-sm font-bold text-white font-sans leading-snug">
                               {eqp.name}
                             </h3>
@@ -1304,7 +1235,54 @@ export default function DashboardPage() {
                               <span className="text-white/40">Incoterms:</span>
                               <span className="text-[#10B981]">{eqp.deliveryIncoterms}</span>
                             </div>
+                            {eqp.location && (
+                              <div className="flex items-center justify-between pt-1 border-t border-white/[0.04] text-[11px]">
+                                <span className="text-white/40 flex items-center gap-1">
+                                  <MapPin className="w-3 h-3 text-rose-400" /> Depot:
+                                </span>
+                                <span className="text-white/80 truncate max-w-[150px]">{eqp.location}</span>
+                              </div>
+                            )}
                           </div>
+
+                          {/* Manufacturer Verified Contacts Box */}
+                          {(eqp.contactPhone || eqp.contactEmail || eqp.website) && (
+                            <div className="p-3 rounded-xl bg-[#0B0C10] border border-white/[0.06] space-y-1.5 text-[11px]">
+                              <div className="text-[10px] text-[#D4AF37] font-bold uppercase tracking-wider mb-1 flex items-center gap-1">
+                                <Building2 className="w-3 h-3" /> Manufacturer Direct Contacts
+                              </div>
+                              {eqp.contactPhone && (
+                                <div className="flex items-center justify-between">
+                                  <span className="text-white/40 flex items-center gap-1">
+                                    <Phone className="w-3 h-3 text-[#10B981]" /> Phone:
+                                  </span>
+                                  <a href={`tel:${eqp.contactPhone}`} className="text-[#10B981] hover:underline font-mono">
+                                    {eqp.contactPhone}
+                                  </a>
+                                </div>
+                              )}
+                              {eqp.contactEmail && (
+                                <div className="flex items-center justify-between">
+                                  <span className="text-white/40 flex items-center gap-1">
+                                    <Mail className="w-3 h-3 text-cyan-400" /> Email:
+                                  </span>
+                                  <a href={`mailto:${eqp.contactEmail}`} className="text-cyan-300 hover:underline truncate max-w-[150px] font-mono">
+                                    {eqp.contactEmail}
+                                  </a>
+                                </div>
+                              )}
+                              {eqp.website && (
+                                <div className="flex items-center justify-between">
+                                  <span className="text-white/40 flex items-center gap-1">
+                                    <Globe className="w-3 h-3 text-indigo-400" /> Portal:
+                                  </span>
+                                  <a href={eqp.website} target="_blank" rel="noopener noreferrer" className="text-indigo-300 hover:underline truncate max-w-[150px] font-mono">
+                                    {eqp.website.replace("https://", "")}
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
 

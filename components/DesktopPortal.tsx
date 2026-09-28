@@ -24,10 +24,12 @@ import {
   Truck,
   MessageSquareCheck,
   Award,
+  Wrench,
 } from "lucide-react";
 import MineralShowcaseCard, {
   MineralLotItem,
 } from "@/components/MineralShowcaseCard";
+import EquipmentCatalogSection from "@/components/EquipmentCatalogSection";
 import { getMineralFallbackImage } from "@/utils/mineralFallback";
 
 type MineralCategory = "all" | "metals" | "stones" | "rare-earth";
@@ -295,6 +297,15 @@ export default function DesktopPortal() {
             >
               <span>{t("nav.marketplace")}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+            </Link>
+            <Link
+              href="#equipment"
+              className="hover:text-accent transition-colors flex items-center gap-1.5"
+            >
+              <span>Equipment</span>
+              <span className="text-[10px] font-mono text-[#D4AF37] bg-[#D4AF37]/15 px-1.5 py-0.2 rounded border border-[#D4AF37]/30 font-bold">
+                LIVE
+              </span>
             </Link>
             <Link
               href="#services"
@@ -610,6 +621,9 @@ export default function DesktopPortal() {
           ))}
         </div>
       </section>
+
+      {/* 5.5. Live Mining Equipment Catalogue */}
+      <EquipmentCatalogSection />
 
       {/* 6. B2B Feature Grid (4 Pillars) */}
       <section id="services" className="px-8 py-20 bg-[#14171F]/50 border-t border-white/[0.08]">

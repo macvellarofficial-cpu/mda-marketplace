@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import NavbarLogo from "@/components/NavbarLogo";
 import {
   Gem,
@@ -9,6 +10,7 @@ import {
   Award,
   Download,
   X,
+  Wrench,
 } from "lucide-react";
 
 interface SlideData {
@@ -65,6 +67,20 @@ const slides: SlideData[] = [
       { label: "CLEARANCE", value: "URA & URSB VERIFIED" },
     ],
   },
+  {
+    id: 4,
+    tag: "OEM MACHINERY DIRECT",
+    title: "Heavy Mining Machinery",
+    headline: "Factory-warranted haul trucks, shovels, drills, and crushers.",
+    description:
+      "Direct procurement from Caterpillar, Komatsu, Sandvik, Epiroc, and Metso with bonded African depot delivery and verified contacts.",
+    accent: "#F59E0B",
+    icon: <Wrench className="w-10 h-10 text-[#F59E0B]" />,
+    specs: [
+      { label: "OEM BRANDS", value: "CAT / KOMATSU / SANDVIK" },
+      { label: "DEPOT DISPATCH", value: "BONDED YARDS" },
+    ],
+  },
 ];
 
 export default function MobileOnboarding() {
@@ -116,10 +132,10 @@ export default function MobileOnboarding() {
         </Link>
 
         <Link
-          href="#marketplace"
+          href="/marketplace"
           className="text-xs font-mono text-white/60 hover:text-[#D4AF37] transition-colors py-1.5 px-3 rounded-full bg-[#14171F] border border-white/[0.08]"
         >
-          Skip to Market →
+          Marketplace →
         </Link>
       </header>
 
@@ -208,12 +224,20 @@ export default function MobileOnboarding() {
           Sign In
         </Link>
 
-        <div className="text-center pt-1">
+        <div className="flex items-center justify-center gap-3 pt-1 text-xs font-mono">
           <Link
-            href="#marketplace"
-            className="text-xs font-mono text-white/50 hover:text-white transition-colors"
+            href="/marketplace"
+            className="text-white/60 hover:text-[#D4AF37] transition-colors"
           >
-            Skip to Marketplace
+            Mineral Marketplace
+          </Link>
+          <span className="text-white/20">•</span>
+          <Link
+            href="/marketplace#equipment"
+            className="text-[#D4AF37] hover:underline flex items-center gap-1 font-semibold"
+          >
+            <Wrench className="w-3 h-3 text-[#D4AF37]" />
+            <span>Equipment</span>
           </Link>
         </div>
       </div>
@@ -222,8 +246,15 @@ export default function MobileOnboarding() {
       {showPwaBanner && (
         <div className="fixed bottom-3 left-3 right-3 z-50 p-3.5 rounded-2xl bg-[#14171F]/95 backdrop-blur-xl border border-white/[0.12] shadow-[0_8px_32px_rgba(0,0,0,0.8)] flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom duration-300">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0B0C10] border border-[#D4AF37]/30 flex items-center justify-center p-2 flex-shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-              <Gem className="w-5 h-5 text-[#D4AF37]" />
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-[0_0_10px_rgba(212,175,55,0.25)] border border-[#D4AF37]/40 flex-shrink-0">
+              <Image
+                src="/icon.png"
+                alt="MDA App Icon"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
+                unoptimized
+              />
             </div>
             <div>
               <div className="flex items-center gap-1.5">

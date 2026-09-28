@@ -7,10 +7,11 @@ import NavbarLogo from "@/components/NavbarLogo";
 import NavbarLanguage from "@/components/NavbarLanguage";
 import AccentPicker from "@/components/theme/AccentPicker";
 import ThemeToggle from "@/components/theme/ThemeToggle";
-import { Gem, Search, PlusCircle, Sparkles } from "lucide-react";
+import { Gem, Search, PlusCircle, Sparkles, Wrench } from "lucide-react";
 import MineralShowcaseCard, {
   MineralLotItem,
 } from "@/components/MineralShowcaseCard";
+import EquipmentCatalogSection from "@/components/EquipmentCatalogSection";
 import { getMineralFallbackImage } from "@/utils/mineralFallback";
 
 interface CustomListingPayload {
@@ -328,6 +329,9 @@ export default function MarketplacePage() {
           </div>
         )}
       </main>
+
+      {/* Heavy Mining Machinery & Extraction Plants Catalogue */}
+      <EquipmentCatalogSection />
 
       {/* Global Footer */}
       <GlobalFooter />

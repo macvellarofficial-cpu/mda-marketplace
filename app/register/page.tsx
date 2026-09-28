@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Gem,
@@ -269,10 +270,16 @@ export default function RegisterPage() {
       {/* Header */}
       <header className="max-w-3xl w-full mx-auto flex items-center justify-between pb-6 border-b border-white/[0.08] relative z-10">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] p-0.5 flex items-center justify-center shadow-[0_0_12px_rgba(212,175,55,0.3)]">
-            <div className="w-full h-full bg-[#0B0C10] rounded-[10px] flex items-center justify-center">
-              <Gem className="w-4 h-4 text-[#D4AF37]" />
-            </div>
+          <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-[0_0_12px_rgba(212,175,55,0.3)] border border-[#D4AF37]/40 flex-shrink-0">
+            <Image
+              src="/icon.png"
+              alt="MDA Icon"
+              width={36}
+              height={36}
+              className="w-full h-full object-cover"
+              priority
+              unoptimized
+            />
           </div>
           <div>
             <span className="font-bold text-sm tracking-wider text-white">
