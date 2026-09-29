@@ -6,9 +6,7 @@ import Link from "next/link";
 import {
   Wrench,
   Search,
-  Filter,
   CheckCircle2,
-  Sparkles,
   Layers,
   Zap,
   MapPin,
@@ -16,7 +14,6 @@ import {
   Phone,
   Mail,
   Globe,
-  FileText,
   ArrowUpRight,
   PlusCircle,
   Truck,
@@ -30,6 +27,37 @@ import {
   DEFAULT_EQUIPMENT_ITEMS,
 } from "@/data/equipmentData";
 import { createClient } from "@/utils/supabase/client";
+
+interface SupabaseEquipmentRow {
+  id: string;
+  name: string;
+  manufacturer?: string;
+  machine_type?: string;
+  machineType?: string;
+  category?: string;
+  capacity?: string;
+  capacity_tph?: number;
+  power_requirement?: string;
+  powerRequirement?: string;
+  delivery_incoterms?: string;
+  deliveryIncoterms?: string;
+  lead_time?: string;
+  leadTime?: string;
+  price_usd?: string;
+  priceUSD?: string;
+  status?: "In Stock" | "Made to Order";
+  location?: string;
+  headquarters?: string;
+  contact_phone?: string;
+  contactPhone?: string;
+  contact_email?: string;
+  contactEmail?: string;
+  website?: string;
+  photo_url?: string;
+  photoUrl?: string;
+  spec_sheet_file_name?: string;
+  specSheetFileName?: string;
+}
 
 export default function EquipmentCatalogSection() {
   const [equipmentList, setEquipmentList] =
@@ -79,20 +107,20 @@ export default function EquipmentCatalogSection() {
           .order("created_at", { ascending: false });
 
         if (!error && data && data.length > 0) {
-          const mappedFromDb: EquipmentItem[] = data.map((item: any) => ({
+          const mappedFromDb: EquipmentItem[] = data.map((item: SupabaseEquipmentRow) => ({
             id: item.id,
             name: item.name,
             manufacturer: item.manufacturer,
-            machineType: item.machine_type || item.machineType,
+            machineType: item.machine_type || item.machineType || "Machinery",
             category: item.category,
-            capacity: item.capacity,
+            capacity: item.capacity || "",
             capacityTPH: item.capacity_tph,
-            powerRequirement: item.power_requirement || item.powerRequirement,
-            deliveryIncoterms: item.delivery_incoterms || item.deliveryIncoterms,
-            leadTime: item.lead_time || item.leadTime,
-            priceUSD: item.price_usd || item.priceUSD,
+            powerRequirement: item.power_requirement || item.powerRequirement || "",
+            deliveryIncoterms: item.delivery_incoterms || item.deliveryIncoterms || "",
+            leadTime: item.lead_time || item.leadTime || "Immediate",
+            priceUSD: item.price_usd || item.priceUSD || "$0",
             status: item.status || "In Stock",
-            location: item.location,
+            location: item.location || "",
             headquarters: item.headquarters,
             contactPhone: item.contact_phone || item.contactPhone,
             contactEmail: item.contact_email || item.contactEmail,
@@ -107,7 +135,7 @@ export default function EquipmentCatalogSection() {
           const uniqueNew = mappedFromDb.filter((d) => !existingIds.has(d.id));
           combined = [...uniqueNew, ...combined];
         }
-      } catch (err) {
+      } catch {
         // Fallback silently
       }
 
@@ -309,7 +337,7 @@ export default function EquipmentCatalogSection() {
       {filteredEquipment.length === 0 ? (
         <div className="text-center py-16 p-8 rounded-3xl bg-[#14171F] border border-white/[0.06] text-white/50 space-y-3 font-mono text-xs">
           <Wrench className="w-10 h-10 mx-auto text-white/30" />
-          <p>No machinery matching "{searchQuery}" in this category.</p>
+          <p>No machinery matching &quot;{searchQuery}&quot; in this category.</p>
           <button
             onClick={() => {
               setSearchQuery("");

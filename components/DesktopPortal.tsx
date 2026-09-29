@@ -24,7 +24,6 @@ import {
   Truck,
   MessageSquareCheck,
   Award,
-  Wrench,
 } from "lucide-react";
 import MineralShowcaseCard, {
   MineralLotItem,
